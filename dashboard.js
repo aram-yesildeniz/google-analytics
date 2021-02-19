@@ -44,6 +44,22 @@ gapi.analytics.ready(function () {
         }
     });
 
+    var dataChart2 = new gapi.analytics.googleCharts.DataChart({
+        query: {
+            metrics: 'ga:avgPageLoadTime',
+            dimensions: 'ga:date',
+            'start-date': '30daysAgo',
+            'end-date': 'yesterday'
+        },
+        chart: {
+            container: 'chart-container-2',
+            type: 'LINE',
+            options: {
+                width: '100%'
+            }
+        }
+    });
+
 
     /**
      * Render the dataChart on the page whenever a new view is selected.
