@@ -336,7 +336,7 @@ gapi.analytics.ready(function () {
     /**
      * Render the dataChart on the page whenever a new view is selected.
      */
-    viewSelector.on('change', function (ids) {
+    viewSelector.on('change', async function (ids) {
         dataChart1.set({
             query: {
                 ids: ids
@@ -372,6 +372,7 @@ gapi.analytics.ready(function () {
                 ids: ids
             }
         }).execute();
+        await new Promise(r => setTimeout(r, 2000));
         dataChart8.set({
             query: {
                 ids: ids
@@ -397,6 +398,7 @@ gapi.analytics.ready(function () {
                 ids: ids
             }
         }).execute();
+        await new Promise(r => setTimeout(r, 2000));
         dataChart13.set({
             query: {
                 ids: ids
