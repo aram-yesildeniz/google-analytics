@@ -70,6 +70,11 @@ gapi.analytics.ready(function () {
                 ids: ids
             }
         }).execute();
+        dataChart2.set({
+            query: {
+                ids: ids
+            }
+        }).execute();
     });
 
 });
