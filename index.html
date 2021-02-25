@@ -39,14 +39,14 @@
     <div id="embed-api-auth-container"></div>
     <div id="view-selector-container"></div>
 
+    <!-- The Sign-in button. This will run `init()` on success. -->
+    <p class="g-signin2" data-onsuccess="init"></p>
+
     <h2>Raw Data for <p id="date"></p></h2>
     
     <label for="start">Date:</label>
     <input type="date" id="start" name="trip-start" value="2018-07-22">
     <button type="button" onclick="onGetData()">Get Data</button>
-
-    <!-- The Sign-in button. This will run `init()` on success. -->
-    <p class="g-signin2" data-onsuccess="init"></p>
 
     <!-- The API response will be printed here. -->
     <div>

@@ -68,6 +68,10 @@ function displayResults(response) {
 }
 
 function onGetData() {
+    // clear output
+    const ul = document.getElementById('query-output');
+    ul.innerHTML = '';
+
     let dateControl = document.querySelector('input[type="date"]');
     let userDate = dateControl.value;
     document.getElementById('date').innerHTML = userDate;
