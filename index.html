@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Google Analytics Data">
+    <meta name="google-signin-client_id"
+        content="1095593119133-2pop822gccbpot7hittg9fjsokh2mbog.apps.googleusercontent.com">
+    <meta name="google-signin-scope" content="https://www.googleapis.com/auth/analytics.readonly">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.ico?">
 
     <title>Google Analytics Data</title>
@@ -28,6 +31,7 @@
             };
         }(window, document, 'script'));
     </script>
+    <script src="rawData.js"></script>
     <script src="dashboard.js"></script>
 </head>
 
@@ -35,7 +39,57 @@
     <div id="embed-api-auth-container"></div>
     <br />
     <div id="view-selector-container"></div>
-    
+    <br />
+    <br />
+    <br />
+
+    <h2>Raw Data</h2>
+
+    <!-- The Sign-in button. This will run `queryReports()` on success. -->
+    <p class="g-signin2" data-onsuccess="queryReports"></p>
+
+    <!-- The API response will be printed here. -->
+    <textarea cols="80" rows="20" id="query-output"></textarea>
+
+    <script>
+        // Replace with your view ID.
+        var VIEW_ID = '236089722';
+
+        // Query the API and print the results to the page.
+        function queryReports() {
+            gapi.client.request({
+                path: '/v4/reports:batchGet',
+                root: 'https://analyticsreporting.googleapis.com/',
+                method: 'POST',
+                body: {
+                    reportRequests: [{
+                        viewId: VIEW_ID,
+                        dateRanges: [{
+                            startDate: '7daysAgo',
+                            endDate: 'today'
+                        }],
+                        metrics: [{
+                            expression: 'ga:sessions'
+                        }]
+                    }]
+                }
+            }).then(displayResults, console.error.bind(console));
+        }
+
+        function displayResults(response) {
+            var formattedJson = JSON.stringify(response.result, null, 2);
+            document.getElementById('query-output').value = formattedJson;
+        }
+    </script>
+
+    <!-- Load the JavaScript API client and Sign-in library. -->
+    <script src="https://apis.google.com/js/client:platform.js"></script>
+
+    <br />
+    <br />
+    <br />
+    <br />
+
     <!-- Charts -->
     <div style="width: 70%; margin: auto">
         <div id="chart-container-1"></div>

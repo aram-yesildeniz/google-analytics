@@ -22,7 +22,6 @@ gapi.analytics.ready(function () {
     // Render the view selector to the page.
     viewSelector.execute();
 
-
     /**
      * Create a new DataChart instance with the given query parameters
      * and Google chart options. It will be rendered inside an element
@@ -59,7 +58,7 @@ gapi.analytics.ready(function () {
             }
         }
     });
-    
+
     var dataChart3 = new gapi.analytics.googleCharts.DataChart({
         query: {
             metrics: 'ga:domLatencyMetricsSample',
@@ -435,5 +434,4 @@ gapi.analytics.ready(function () {
             }
         }).execute();
     });
-
 });
