@@ -58,6 +58,6 @@ function displayResults(response) {
     console.log(metric + ": " + value);
 
     const div = document.getElementById('query-output');
-    const content = document.createTextNode(metric + "\t\t" + value);
+    const content = document.createTextNode(metric + ": " + value + "\n");
     div.appendChild(content);
 }
