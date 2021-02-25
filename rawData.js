@@ -57,7 +57,7 @@ function displayResults(response) {
     let value = response.result.reports[0].data.totals[0].values;
     console.log(metric + ": " + value);
 
-    const div = document.getElementById('query-ouput');
+    const div = document.getElementById('query-output');
     const content = document.createTextNode(metric + "\t\t" + value);
     div.appendChild(content);
 }
