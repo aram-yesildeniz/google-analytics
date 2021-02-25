@@ -54,6 +54,8 @@
         // Replace with your view ID.
         var VIEW_ID = '236089722';
 
+        var date = '2021-02-23';
+
         // Query the API and print the results to the page.
         function queryReports() {
             gapi.client.request({
@@ -64,11 +66,11 @@
                     reportRequests: [{
                         viewId: VIEW_ID,
                         dateRanges: [{
-                            startDate: '7daysAgo',
-                            endDate: 'today'
+                            startDate: date,
+                            endDate: date
                         }],
                         metrics: [{
-                            expression: 'ga:sessions'
+                            expression: 'ga:avgPageLoadTime'
                         }]
                     }]
                 }
@@ -76,6 +78,7 @@
         }
 
         function displayResults(response) {
+            console.log(response);
             var formattedJson = JSON.stringify(response.result, null, 2);
             document.getElementById('query-output').value = formattedJson;
         }
