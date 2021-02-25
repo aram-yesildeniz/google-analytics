@@ -25,10 +25,11 @@ var date = '2021-02-23';
 
 async function init() {
     document.getElementById('date').innerHTML = date;
-    metrics.forEach(metric => {
+    for (const metric of metrics) {
         queryReports(date, metric);
         await new Promise(r => setTimeout(r, 500));
-    });
+    }
+    // metrics.forEach(metric => {});
 }
 
 // Query the API and print the results to the page.
