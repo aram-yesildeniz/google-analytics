@@ -23,8 +23,12 @@ var metrics = [
 var VIEW_ID = '236089722';
 var date = '2021-02-23';
 
-function init() {
-    metrics.forEach(metric => queryReports(date, metric));
+async function init() {
+    document.getElementById('date').innerHTML = date;
+    metrics.forEach(metric => {
+        queryReports(date, metric);
+        await new Promise(r => setTimeout(r, 500));
+    });
 }
 
 // Query the API and print the results to the page.
