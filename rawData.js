@@ -24,6 +24,7 @@ let values = [];
 
 let VIEW_ID = '236089722';
 let date = '2021-02-23';
+let userDate = date;
 
 function init() {
     document.getElementById('date').innerHTML = date;
@@ -78,7 +79,7 @@ function onGetData() {
     values = [];
 
     let dateControl = document.querySelector('input[type="date"]');
-    let userDate = dateControl.value;
+    userDate = dateControl.value;
     document.getElementById('date').innerHTML = userDate;
     console.log("Get Data for date: " + userDate);
     loadAllMetrics(userDate);
@@ -98,5 +99,13 @@ function onDownloadCSV() {
     });
 
     var encodedUri = encodeURI(csvContent);
-    window.open(encodedUri);
+    // window.open(encodedUri);
+
+    var encodedUri = encodeURI(csvContent);
+    var link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", userDate + ".csv");
+    document.body.appendChild(link); // Required for FF
+
+    link.click(); // This will download the data file named "my_data.csv".
 }
