@@ -20,11 +20,15 @@ var metrics = [
     'ga:avgDomContentLoadedTime',
 ]
 
-var VIEW_ID = '236089722';
-var date = '2021-02-23';
+let VIEW_ID = '236089722';
+let date = '2021-02-23';
 
-async function init() {
+function init() {
     document.getElementById('date').innerHTML = date;
+    loadAllMetrics(date);
+}
+
+async function loadAllMetrics(date) {
     for (const metric of metrics) {
         queryReports(date, metric);
         await new Promise(r => setTimeout(r, 500));
@@ -61,4 +65,12 @@ function displayResults(response) {
     const li = document.createElement("li");
     li.appendChild(document.createTextNode(metric + ": " + value));
     ul.appendChild(li);
+}
+
+function onGetData() {
+    let dateControl = document.querySelector('input[type="date"]');
+    let userDate = dateControl.value;
+    document.getElementById('date').innerHTML = userDate;
+    console.log("Get Data for date: " + userDate);
+    loadAllMetrics(userDate);
 }
