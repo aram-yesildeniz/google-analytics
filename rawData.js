@@ -20,6 +20,8 @@ var metrics = [
     'ga:avgDomContentLoadedTime',
 ]
 
+let values = [];
+
 let VIEW_ID = '236089722';
 let date = '2021-02-23';
 
@@ -61,6 +63,8 @@ function displayResults(response) {
     let value = response.result.reports[0].data.totals[0].values;
     console.log(metric + ": " + value);
 
+    values.push(value);
+
     const ul = document.getElementById('query-output');
     const li = document.createElement("li");
     li.appendChild(document.createTextNode(metric + ": " + value));
@@ -71,10 +75,28 @@ function onGetData() {
     // clear output
     const ul = document.getElementById('query-output');
     ul.innerHTML = '';
+    values = [];
 
     let dateControl = document.querySelector('input[type="date"]');
     let userDate = dateControl.value;
     document.getElementById('date').innerHTML = userDate;
     console.log("Get Data for date: " + userDate);
     loadAllMetrics(userDate);
+}
+
+function onDownloadCSV() {
+    const rows = [
+        metrics,
+        values
+    ];
+
+    let csvContent = "data:text/csv;charset=utf-8,";
+
+    rows.forEach(function (rowArray) {
+        let row = rowArray.join(",");
+        csvContent += row + "\r\n";
+    });
+
+    var encodedUri = encodeURI(csvContent);
+    window.open(encodedUri);
 }
