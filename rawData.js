@@ -29,7 +29,6 @@ async function init() {
         queryReports(date, metric);
         await new Promise(r => setTimeout(r, 500));
     }
-    // metrics.forEach(metric => {});
 }
 
 // Query the API and print the results to the page.
@@ -56,8 +55,9 @@ function queryReports(date, metric) {
 function displayResults(response) {
     let metric = response.result.reports[0].columnHeader.metricHeader.metricHeaderEntries[0].name;
     let value = response.result.reports[0].data.totals[0].values;
-    console.log(metric + ":\t" + value);
-    // console.log(reponse.blabla + ": " + "");
-    // var formattedJson = JSON.stringify(response.result, null, 2);
-    // document.getElementById('query-output').value = formattedJson;
+    console.log(metric + ": " + value);
+
+    const div = document.getElementById('query-ouput');
+    const content = document.createTextNode(metric + "\t\t" + value);
+    div.appendChild(content);
 }
