@@ -24,7 +24,7 @@ var VIEW_ID = '236089722';
 var date = '2021-02-23';
 
 function init() {
-    queryReports(date, metrics[0]);
+    metrics.forEach(metric => queryReports(date, metric));
 }
 
 // Query the API and print the results to the page.
@@ -49,7 +49,10 @@ function queryReports(date, metric) {
 }
 
 function displayResults(response) {
-    console.log(response);
-    var formattedJson = JSON.stringify(response.result, null, 2);
-    document.getElementById('query-output').value = formattedJson;
+    let metric = response.result.reports[0].columnHeader.metricHeader.metricHeaderEntries[0].name;
+    let value = response.result.reports[0].data.totals[0].values;
+    console.log(metric + ":\t" + value);
+    // console.log(reponse.blabla + ": " + "");
+    // var formattedJson = JSON.stringify(response.result, null, 2);
+    // document.getElementById('query-output').value = formattedJson;
 }
